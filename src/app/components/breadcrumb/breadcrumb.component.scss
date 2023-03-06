@@ -1,0 +1,18 @@
+ol {
+    list-style: none;
+    li {
+        display: inline;
+        margin-inline: 0.8rem;
+        a {
+            color: #a7a7a7
+        }
+
+        &:last-child {
+            pointer-events: none;
+            a {
+                color: red
+            }
+            
+        }
+    }
+}
