@@ -13,6 +13,10 @@ const levelRoutes: Routes = [
                 path: 'first',
                 component: FirstComponent,
             },
+            {
+                path: 'second',
+                component: SecondComponent,
+            },
         ],
     },
 ];

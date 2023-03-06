@@ -57,19 +57,14 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-bookmark',
                         items: [
                             {
-                                label: 'Lv. 1 - 44',
+                                label: 'Lv. 1 - 142',
                                 icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/level/first'],
                             },
                             {
-                                label: 'Lv. 44 - 142',
-                                icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/level/second'],
-                            },
-                            {
                                 label: 'Lv. 142 - 170',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/level/third'],
+                                routerLink: ['/level/second'],
                             },
                         ],
                     },
