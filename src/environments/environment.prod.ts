@@ -1,3 +1,23 @@
+import {
+    AuthService,
+    IAuthService,
+} from 'src/app/components/services/auth.service';
+import {
+    IProfileService,
+    ProfileService,
+} from 'src/app/components/services/profile.service';
+
 export const environment = {
-  production: true
+    apiRoot: 'https://betestvm01.southeastasia.cloudapp.azure.com',
+    production: true,
+    providers: [
+        {
+            provide: IAuthService,
+            useClass: AuthService,
+        },
+        {
+            provide: IProfileService,
+            useClass: ProfileService,
+        },
+    ],
 };
