@@ -32,7 +32,7 @@ export class ApiClient {
      * @param body (optional) 
      * @return Success
      */
-    createUser(body: UserProfileModel | undefined): Observable<void> {
+    createUser(body: UserProfileModel | undefined): Observable<ActionResponseModel> {
         let url_ = this.baseUrl + "/api/Account/createUser";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -44,6 +44,7 @@ export class ApiClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "text/plain"
             })
         };
 
@@ -54,14 +55,14 @@ export class ApiClient {
                 try {
                     return this.processCreateUser(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<ActionResponseModel>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<ActionResponseModel>;
         }));
     }
 
-    protected processCreateUser(response: HttpResponseBase): Observable<void> {
+    protected processCreateUser(response: HttpResponseBase): Observable<ActionResponseModel> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -70,14 +71,22 @@ export class ApiClient {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return _observableOf<void>(null as any);
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ActionResponseModel;
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            result400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ActionResponseModel;
+            return throwException("Bad Request", status, _responseText, _headers, result400);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<void>(null as any);
+        return _observableOf<ActionResponseModel>(null as any);
     }
 
     /**

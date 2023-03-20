@@ -3,6 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 import {
+    AccountService,
+    IAccountService,
+} from 'src/app/components/services/account.service';
+import {
     AuthService,
     IAuthService,
 } from 'src/app/components/services/auth.service';
@@ -23,6 +27,10 @@ export const environment = {
         {
             provide: IProfileService,
             useClass: ProfileService,
+        },
+        {
+            provide: IAccountService,
+            useClass: AccountService,
         },
     ],
 };

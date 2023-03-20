@@ -12,13 +12,19 @@ import { RouterModule } from '@angular/router';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
-    declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ForgotPasswordComponent],
+    declarations: [
+        LoginComponent,
+        RegisterComponent,
+        ResetPasswordComponent,
+        ForgotPasswordComponent,
+    ],
     imports: [
         CommonModule,
         ButtonModule,
         CheckboxModule,
         InputTextModule,
         FormsModule,
+        RouterModule,
         ReactiveFormsModule,
         RouterModule,
         PasswordModule,

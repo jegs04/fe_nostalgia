@@ -27,87 +27,78 @@
                     class="w-full surface-card py-8 px-5 sm:px-8"
                     style="border-radius: 53px"
                 >
-                    <div>
-                        <label
-                            for="email1"
-                            class="block text-900 text-xl font-medium mb-2"
-                            >Username</label
-                        >
-                        <input
-                            id="email1"
-                            type="text"
-                            placeholder="Username"
-                            pInputText
-                            class="w-full md:w-30rem mb-5"
-                            style="padding: 1rem"
-                        />
-
-                        <label
-                            for="password1"
-                            class="block text-900 font-medium text-xl mb-2"
-                            >Password</label
-                        >
-                        <p-password
-                            id="password1"
-                            [(ngModel)]="password"
-                            placeholder="Password"
-                            [toggleMask]="true"
-                            styleClass="mb-5"
-                            inputStyleClass="w-full p-3 md:w-30rem"
-                        ></p-password>
-
-                        <label
-                            for="password1"
-                            class="block text-900 font-medium text-xl mb-2"
-                            >Confirm Password</label
-                        >
-                        <p-password
-                            id="password1"
-                            [(ngModel)]="password"
-                            placeholder="Password"
-                            [toggleMask]="true"
-                            styleClass="mb-5"
-                            inputStyleClass="w-full p-3 md:w-30rem"
-                        ></p-password>
-
-                        <label
-                            for="email1"
-                            class="block text-900 text-xl font-medium mb-2"
-                            >Email Address</label
-                        >
-                        <input
-                            id="email1"
-                            type="email"
-                            placeholder="Email Address"
-                            pInputText
-                            class="w-full md:w-30rem mb-5"
-                            style="padding: 1rem"
-                        />
-
-                        <div
-                            class="flex align-items-center justify-content-between mb-5 gap-5"
-                        >
-                            <div class="flex align-items-center">
-                                <p-checkbox
-                                    id="rememberme1"
-                                    [binary]="true"
-                                    styleClass="mr-2"
-                                ></p-checkbox>
-                                <label for="rememberme1">Remember me</label>
-                            </div>
-                            <a
-                                class="font-medium no-underline ml-2 text-right cursor-pointer"
-                                style="color: var(--primary-color)"
-                                >Forgot password?</a
+                    <form [formGroup]="registerForm">
+                        <div>
+                            <label
+                                for="userName"
+                                class="block text-900 text-xl font-medium mb-2"
+                                >Username</label
                             >
+                            <input
+                                id="userName"
+                                type="text"
+                                placeholder="Username"
+                                pInputText
+                                class="w-full md:w-30rem mb-5"
+                                style="padding: 1rem"
+                                formControlName="userName"
+                            />
+
+                            <label
+                                for="password1"
+                                class="block text-900 font-medium text-xl mb-2"
+                                >Password</label
+                            >
+                            <p-password
+                                id="password1"
+                                placeholder="Password"
+                                [toggleMask]="true"
+                                styleClass="mb-5"
+                                inputStyleClass="w-full p-3 md:w-30rem"
+                                formControlName="password"
+                            ></p-password>
+
+                            <label
+                                for="password1"
+                                class="block text-900 font-medium text-xl mb-2"
+                                >Confirm Password</label
+                            >
+                            <p-password
+                                id="password1"
+                                placeholder="Confirm Password"
+                                [toggleMask]="true"
+                                styleClass="mb-5"
+                                inputStyleClass="w-full p-3 md:w-30rem"
+                                formControlName="confirmPassword"
+                            ></p-password>
+
+                            <label
+                                for="email1"
+                                class="block text-900 text-xl font-medium mb-2"
+                                >Email Address</label
+                            >
+                            <input
+                                id="email1"
+                                type="email"
+                                placeholder="Email Address"
+                                pInputText
+                                class="w-full md:w-30rem mb-5"
+                                style="padding: 1rem"
+                                formControlName="email"
+                            />
+
+                            <div
+                                class="flex align-items-center justify-content-between mb-5 gap-5"
+                            ></div>
+                            <button
+                                pButton
+                                pRipple
+                                label="Submit"
+                                class="w-full p-3 text-xl"
+                                (click)="onSubmit()"
+                            ></button>
                         </div>
-                        <button
-                            pButton
-                            pRipple
-                            label="Sign In"
-                            class="w-full p-3 text-xl"
-                        ></button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
