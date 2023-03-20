@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { IAccountService } from '../../services/account.service';
+import { NotifyService } from '../../services/notify.service';
 
 @Component({
     selector: 'app-register',
@@ -17,7 +18,8 @@ export class RegisterComponent {
     constructor(
         public layoutService: LayoutService,
         private accountService: IAccountService,
-        private router: Router
+        private router: Router,
+        private notifyService: NotifyService
     ) {}
 
     ngOnInit(): void {
@@ -40,8 +42,15 @@ export class RegisterComponent {
                 .pipe(take(1))
                 .subscribe((res) => {
                     if (res.statusCode === 200) {
-                        console.log(res);
+                        this.notifyService.success(
+                            'Success',
+                            'User has been created'
+                        );
                         this.router.navigate(['/login']);
+                    }
+
+                    if (res.statuscdoe === 400) {
+                        this.notifyService.error(res.status, res.message);
                     }
                 });
         }
