@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Observable, take } from 'rxjs';
 import { ProfileModel } from 'src/app/api-client/api-client';
+import { NotifyService } from '../services/notify.service';
 import { IProfileService, ProfileService } from '../services/profile.service';
 
 @Component({
@@ -12,7 +14,10 @@ import { IProfileService, ProfileService } from '../services/profile.service';
 export class ProfileComponent {
     profile$: Observable<ProfileModel>;
     changePasswordForm: FormGroup;
-    constructor(private profileService: IProfileService) {}
+    constructor(
+        private profileService: IProfileService,
+        private notifyService: NotifyService
+    ) {}
 
     ngOnInit(): void {
         this.changePasswordForm = new FormGroup({
@@ -34,7 +39,12 @@ export class ProfileComponent {
             .changePassword(userName, email, data.oldPassword, data.newPassword)
             .pipe(take(1))
             .subscribe((res) => {
-                console.log(res);
+                this.notifyService.success(
+                    'Change Password',
+                    'Successfully changed password.'
+                );
+
+                this.changePasswordForm.reset();
             });
     }
 }

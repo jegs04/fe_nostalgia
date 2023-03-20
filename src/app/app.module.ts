@@ -20,10 +20,18 @@ import { API_BASE_URL } from './api-client/api-client';
 import { environment } from 'src/environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './components/services/http-interceptor.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [CommonModule, CoreModule, AppRoutingModule, AppLayoutModule],
+    imports: [
+        CommonModule,
+        CoreModule,
+        AppRoutingModule,
+        ToastModule,
+        AppLayoutModule,
+    ],
     providers: [
         { provide: API_BASE_URL, useValue: environment.apiRoot },
         // { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -39,6 +47,7 @@ import { HttpInterceptorService } from './components/services/http-interceptor.s
             useClass: HttpInterceptorService,
             multi: true,
         },
+        MessageService,
         ...environment.providers,
     ],
     bootstrap: [AppComponent],

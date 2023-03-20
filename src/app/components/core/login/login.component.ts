@@ -5,6 +5,7 @@ import { take } from 'rxjs';
 import { ProblemDetails } from 'src/app/api-client/api-client';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { IAuthService } from '../../services/auth.service';
+import { NotifyService } from '../../services/notify.service';
 
 @Component({
     selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
     constructor(
         public layoutService: LayoutService,
         private authService: IAuthService,
-        private router: Router
+        private router: Router,
+        private notifyService: NotifyService
     ) {}
 
     ngOnInit(): void {
@@ -39,10 +41,15 @@ export class LoginComponent {
             .pipe(take(1))
             .subscribe((res) => {
                 if (!res.success) {
+                    this.notifyService.error(
+                        (res as ProblemDetails).title,
+                        (res as ProblemDetails).detail
+                    );
                     this.loginForm.patchValue({ password: '' });
                     // alert((res as ProblemDetails).detail);
                 }
-                console.log(res);
+
+                this.notifyService.success('Success', 'Signed In');
 
                 this.router.navigate(['profile']);
             });

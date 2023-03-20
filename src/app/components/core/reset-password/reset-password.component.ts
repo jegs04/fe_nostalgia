@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { IAuthService } from '../../services/auth.service';
+import { NotifyService } from '../../services/notify.service';
 
 @Component({
     selector: 'app-reset-password',
@@ -16,7 +17,8 @@ export class ResetPasswordComponent {
     constructor(
         private route: ActivatedRoute,
         private authService: IAuthService,
-        private router: Router
+        private router: Router,
+        private notifyService: NotifyService
     ) {}
 
     ngOnInit(): void {
@@ -43,10 +45,20 @@ export class ResetPasswordComponent {
                 .subscribe((res) => {
                     this.resetForm.reset();
 
-                    if (res.statusCode === 200)
+                    if (res.statusCode === 200) {
                         this.router.navigate(['/login']);
-                    if (res.statusCode === 401)
+                        this.notifyService.success(
+                            'Success',
+                            'Password changed successfully'
+                        );
+                    }
+                    if (res.statusCode === 401) {
+                        this.notifyService.error(
+                            'Invalid Operation',
+                            'An error has occured. Please try again'
+                        );
                         this.router.navigate(['/forgot-password']);
+                    }
                 });
         }
     }
