@@ -49,7 +49,7 @@ export class RegisterComponent {
                         this.router.navigate(['/login']);
                     }
 
-                    if (res.statuscdoe === 400) {
+                    if (res.statusCode === 400) {
                         this.notifyService.error(res.status, res.message);
                     }
                 });
