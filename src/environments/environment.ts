@@ -17,7 +17,7 @@ import {
 
 export const environment = {
     auth_status: 'fe',
-    apiRoot: 'https://betestvm01.southeastasia.cloudapp.azure.com',
+    apiRoot: 'http://localhost:5198',
     production: false,
     providers: [
         {

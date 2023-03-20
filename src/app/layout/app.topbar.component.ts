@@ -29,8 +29,13 @@ export class AppTopBarComponent {
     }
 
     logOut() {
-        this.router.navigate(['/']).then(() => {
-            this.authService.userLogOut();
-        });
+        this.authService
+            .userLogOut()
+            .pipe(take(1))
+            .subscribe((res) => {
+                if (res.statusCode === 200) {
+                    this.router.navigate(['/login']);
+                }
+            });
     }
 }

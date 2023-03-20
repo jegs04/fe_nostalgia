@@ -12,6 +12,7 @@ import {
     ApiClient,
     ProblemDetails,
     LoginResponseModel,
+    ActionResponseModel,
 } from 'src/app/api-client/api-client';
 
 @Injectable()
@@ -22,7 +23,7 @@ export abstract class IAuthService {
         username: string,
         password: string
     ): Observable<LoginResponseModel | ProblemDetails>;
-    public abstract userLogOut(): void;
+    public abstract userLogOut(): Observable<ActionResponseModel>;
     public abstract forgotPassword(email: string);
     public abstract resetPassword(token: string, password: string);
 }
@@ -98,9 +99,16 @@ export class AuthService extends IAuthService {
             })
         );
     }
-    public userLogOut(): void {
-        this._isUserLoggedInSubject.next(null);
-        sessionStorage.removeItem('btn');
-        this._displayLogoutSubject.next(false);
+    public userLogOut(): Observable<ActionResponseModel> {
+        return this.apiClient.logout().pipe(
+            take(1),
+            map((res) => {
+                this._isUserLoggedInSubject.next(null);
+                sessionStorage.removeItem('fe');
+                sessionStorage.removeItem('btn');
+                this._displayLogoutSubject.next(false);
+                return res;
+            })
+        );
     }
 }
