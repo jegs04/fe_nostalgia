@@ -1,0 +1,143 @@
+{
+    "runtime": "Net60",
+
+    "defaultVariables": null,
+
+    "documentGenerator": {
+        "fromDocument": {
+            "json": "api-docs.jsonc",
+
+            "url": "http://redocly.github.io/redoc/openapi.yaml",
+
+            "output": null,
+
+            "newLineBehavior": "Auto"
+        }
+    },
+
+    "codeGenerators": {
+        "openApiToTypeScriptClient": {
+            "className": "ApiClient",
+
+            "moduleName": "",
+
+            "namespace": "",
+
+            "typeScriptVersion": 4.3,
+
+            "template": "Angular",
+
+            "promiseType": "Promise",
+
+            "httpClass": "HttpClient",
+
+            "withCredentials": false,
+
+            "useSingletonProvider": true,
+
+            "injectionTokenType": "InjectionToken",
+
+            "rxJsVersion": 6.0,
+
+            "dateTimeType": "Date",
+
+            "nullValue": "Undefined",
+
+            "generateClientClasses": true,
+
+            "generateClientInterfaces": false,
+
+            "generateOptionalParameters": false,
+
+            "exportTypes": true,
+
+            "wrapDtoExceptions": false,
+
+            "exceptionClass": "ApiException",
+
+            "clientBaseClass": null,
+
+            "wrapResponses": false,
+
+            "wrapResponseMethods": [],
+
+            "generateResponseClasses": true,
+
+            "responseClass": "SwaggerResponse",
+
+            "protectedMethods": [],
+
+            "configurationClass": null,
+
+            "useTransformOptionsMethod": false,
+
+            "useTransformResultMethod": false,
+
+            "generateDtoTypes": true,
+
+            "operationGenerationMode": "SingleClientFromOperationId",
+
+            "markOptionalProperties": true,
+
+            "generateCloneMethod": false,
+
+            "typeStyle": "Interface",
+
+            "enumStyle": "StringLiteral",
+
+            "useLeafType": false,
+
+            "classTypes": [],
+
+            "extendedClasses": [],
+
+            "extensionCode": null,
+
+            "generateDefaultValues": true,
+
+            "excludedTypeNames": [],
+
+            "excludedParameterNames": [],
+
+            "handleReferences": false,
+
+            "generateTypeCheckFunctions": false,
+
+            "generateConstructorInterface": false,
+
+            "convertConstructorInterfaceData": false,
+
+            "importRequiredTypes": true,
+
+            "useGetBaseUrlMethod": false,
+
+            "baseUrlTokenName": "API_BASE_URL",
+
+            "queryNullValue": "",
+
+            "useAbortSignal": false,
+
+            "inlineNamedDictionaries": true,
+
+            "inlineNamedAny": false,
+
+            "includeHttpContext": false,
+
+            "templateDirectory": null,
+
+            "typeNameGeneratorType": null,
+
+            "propertyNameGeneratorType": null,
+
+            "enumNameGeneratorType": null,
+
+            "serviceHost": null,
+
+            "serviceSchemes": null,
+
+            "output": "src/app/api-client/api-client.ts",
+
+            "newLineBehavior": "Auto"
+        }
+    }
+}

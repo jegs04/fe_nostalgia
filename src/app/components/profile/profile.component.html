@@ -1,0 +1,67 @@
+<h5>Profile</h5>
+<div class="grid" *ngIf="profile$ | async as profile">
+    <div class="col-12 md:col-6">
+        <p-fieldset
+            legend="Your Information"
+            [toggleable]="false"
+            class="line-height-3 m-0"
+        >
+            <p>{{ profile.name }}</p>
+            <p>{{ profile.email }}</p>
+        </p-fieldset>
+
+        <div class="mt-3">
+            <p-fieldset
+                legend="Change Password"
+                [toggleable]="false"
+                class="line-height-3 m-0"
+            >
+                <div class="card p-fluid">
+                    <form [formGroup]="changePasswordForm">
+                        <div class="field">
+                            <label htmlFor="email1">Old Password</label>
+                            <p-password
+                                id="password1"
+                                placeholder="Old Password"
+                                [toggleMask]="true"
+                                styleClass="mb-5"
+                                inputStyleClass="w-full p-3"
+                                formControlName="oldPassword"
+                            ></p-password>
+                        </div>
+                        <div class="field">
+                            <label htmlFor="email1">New Password</label>
+                            <p-password
+                                id="password1"
+                                placeholder="New Password"
+                                [toggleMask]="true"
+                                styleClass="mb-5"
+                                inputStyleClass="w-full p-3"
+                                formControlName="newPassword"
+                            ></p-password>
+                        </div>
+                        <div class="field">
+                            <label htmlFor="age1">New Confirm Password</label>
+                            <p-password
+                                id="password1"
+                                placeholder="Confirm New Password"
+                                [toggleMask]="true"
+                                styleClass="mb-5"
+                                inputStyleClass="w-full p-3"
+                                formControlName="confirmNewPassword"
+                            ></p-password>
+                        </div>
+                        <div class="mt-5">
+                            <button
+                                pButton
+                                pRipple
+                                (click)="onSubmit(profile.name, profile.email)"
+                                label="Submit"
+                            ></button>
+                        </div>
+                    </form>
+                </div>
+            </p-fieldset>
+        </div>
+    </div>
+</div>

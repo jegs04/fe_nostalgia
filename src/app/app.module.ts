@@ -15,12 +15,18 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
+import { CoreModule } from './components/core/core.module';
+import { API_BASE_URL } from './api-client/api-client';
+import { environment } from 'src/environments/environment';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from './components/services/http-interceptor.service';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [CommonModule, AppRoutingModule, AppLayoutModule],
+    imports: [CommonModule, CoreModule, AppRoutingModule, AppLayoutModule],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        { provide: API_BASE_URL, useValue: environment.apiRoot },
+        // { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService,
         CustomerService,
         EventService,
@@ -28,6 +34,12 @@ import { PhotoService } from './demo/service/photo.service';
         NodeService,
         PhotoService,
         ProductService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpInterceptorService,
+            multi: true,
+        },
+        ...environment.providers,
     ],
     bootstrap: [AppComponent],
 })

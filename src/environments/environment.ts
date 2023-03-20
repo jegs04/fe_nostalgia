@@ -2,8 +2,29 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import {
+    AuthService,
+    IAuthService,
+} from 'src/app/components/services/auth.service';
+import {
+    IProfileService,
+    ProfileService,
+} from 'src/app/components/services/profile.service';
+
 export const environment = {
-  production: false
+    auth_status: 'fe',
+    apiRoot: 'https://betestvm01.southeastasia.cloudapp.azure.com',
+    production: false,
+    providers: [
+        {
+            provide: IAuthService,
+            useClass: AuthService,
+        },
+        {
+            provide: IProfileService,
+            useClass: ProfileService,
+        },
+    ],
 };
 
 /*
